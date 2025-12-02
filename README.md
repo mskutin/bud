@@ -1,8 +1,12 @@
 # Bud
 
-[![Go Version](https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&logo=go)](https://go.dev/)
+[![Go Version](https://img.shields.io/badge/Go-1.25+-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/mskutin/bud?include_prereleases)](https://github.com/mskutin/bud/releases)
+[![Test](https://github.com/mskutin/bud/actions/workflows/test.yml/badge.svg)](https://github.com/mskutin/bud/actions/workflows/test.yml)
+[![Security](https://github.com/mskutin/bud/actions/workflows/security.yml/badge.svg)](https://github.com/mskutin/bud/actions/workflows/security.yml)
 [![codecov](https://codecov.io/gh/mskutin/bud/branch/main/graph/badge.svg)](https://codecov.io/gh/mskutin/bud)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mskutin/bud)](https://goreportcard.com/report/github.com/mskutin/bud)
 
 > Your AWS budget buddy
 
