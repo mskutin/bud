@@ -107,3 +107,13 @@ brews:
       bin.install "bud"
     test: |
       system "#{bin}/bud", "--version"
+
+scoops:
+  - name: bud
+    repository:
+      owner: mskutin
+      name: scoop-bucket
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+    homepage: https://github.com/mskutin/bud
+    description: Your AWS budget buddy - smart recommendations based on spending patterns
+    license: MIT

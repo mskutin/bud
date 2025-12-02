@@ -12,7 +12,14 @@ A command-line tool that analyzes AWS spending patterns and generates intelligen
 ## 🚀 Quick Start
 
 ```bash
-# Install
+# Install (macOS/Linux)
+brew install mskutin/tap/bud
+
+# Install (Windows)
+scoop bucket add mskutin https://github.com/mskutin/scoop-bucket
+scoop install bud
+
+# Or use Go
 go install github.com/mskutin/bud@latest
 
 # Run basic analysis
@@ -25,6 +32,7 @@ bud --assume-role-name OrganizationAccountAccessRole
 bud --config .bud.yaml
 ```
 
+**See [Installation](#installation) for all installation methods.**  
 **See [Configuration](#configuration) for detailed setup options.**  
 **See [ALTERNATIVES.md](ALTERNATIVES.md) for comparison with other tools.**
 
@@ -91,18 +99,45 @@ This tool helps you optimize your **AWS Budgets** configurations by:
 └─────────────────┘
 ```
 
-## Quick Start
+## Installation
 
-### Installation
+### macOS / Linux
+
+**Homebrew:**
+```bash
+brew install mskutin/tap/bud
+```
+
+**Go Install:**
+```bash
+go install github.com/mskutin/bud@latest
+```
+
+### Windows
+
+**Scoop:**
+```powershell
+scoop bucket add mskutin https://github.com/mskutin/scoop-bucket
+scoop install bud
+```
+
+**Go Install:**
+```powershell
+go install github.com/mskutin/bud@latest
+```
+
+**Manual Download:**
+Download the Windows binary from the [releases page](https://github.com/mskutin/bud/releases/latest), extract it, and add to your PATH.
+
+### From Source
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/bud.git
+git clone https://github.com/mskutin/bud.git
 cd bud
-
-# Build the binary
 go build -o bud ./cmd/bud
 ```
+
+## Quick Start
 
 ### Basic Usage
 
