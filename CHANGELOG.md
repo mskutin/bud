@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-rc.3] - 2025-12-02
+
+### Added
+- SVG logo and icon for branding
+- ASCII art banner in CLI with version information
+- Build status, security, and release badges to README
+- Logo display in README
+
+### Changed
+- Updated to Go 1.25 with latest security patches
+- Upgraded all dependencies (AWS SDK, golang.org/x packages)
+- Updated GitHub Actions to use CodeQL v4
+
+### Fixed
+- Addressed all gosec security findings with proper error handling
+- Fixed SARIF upload for GitHub Code Scanning
+- Resolved Go standard library vulnerabilities by upgrading to Go 1.25
+
+### Security
+- All security scans passing (govulncheck, gosec, CodeQL)
+- Proper error handling for viper, progress bars, and fmt.Sscanf
+- File creation security validated with #nosec annotations
+
 ## [1.0.0-rc.2] - 2025-12-02
 
 ### Added
@@ -105,6 +128,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Exponential backoff retry logic
 - Graceful shutdown support
 
-[Unreleased]: https://github.com/mskutin/bud/compare/v1.0.0-rc.2...HEAD
+[Unreleased]: https://github.com/mskutin/bud/compare/v1.0.0-rc.3...HEAD
+[1.0.0-rc.3]: https://github.com/mskutin/bud/compare/v1.0.0-rc.2...v1.0.0-rc.3
 [1.0.0-rc.2]: https://github.com/mskutin/bud/compare/v1.0.0-rc.1...v1.0.0-rc.2
 [1.0.0-rc.1]: https://github.com/mskutin/bud/releases/tag/v1.0.0-rc.1
