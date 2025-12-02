@@ -194,7 +194,7 @@ func (c *Client) calculateBackoff(attempt int) time.Duration {
 	// Exponential backoff: baseMs * 2^attempt
 	backoffMs := float64(c.backoffMs) * math.Pow(2, float64(attempt))
 
-	// Cap at 60 seconds
+	// Cap at 60 seconds before adding jitter
 	if backoffMs > 60000 {
 		backoffMs = 60000
 	}
@@ -202,6 +202,11 @@ func (c *Client) calculateBackoff(attempt int) time.Duration {
 	// Add jitter (±25%)
 	jitter := backoffMs * 0.25
 	backoffMs = backoffMs - jitter + (2 * jitter * float64(time.Now().UnixNano()%1000) / 1000)
+
+	// Ensure we don't exceed cap after jitter
+	if backoffMs > 60000 {
+		backoffMs = 60000
+	}
 
 	return time.Duration(backoffMs) * time.Millisecond
 }
