@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-rc.2] - 2025-12-02
+
+### Added
+- Scoop package manager support for Windows users
+- Comprehensive security scanning (CodeQL, gosec, govulncheck)
+- Dependabot for automated dependency updates
+- Codecov integration for test coverage tracking
+- Coverage badge in README
+
+### Changed
+- Updated installation documentation with all platform options
+- Improved Windows installation instructions
+
 ## [1.0.0-rc.1] - 2025-12-02
 
 ### Added
@@ -92,5 +105,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Exponential backoff retry logic
 - Graceful shutdown support
 
-[Unreleased]: https://github.com/mskutin/bud/compare/v1.0.0-rc.1...HEAD
+[Unreleased]: https://github.com/mskutin/bud/compare/v1.0.0-rc.2...HEAD
+[1.0.0-rc.2]: https://github.com/mskutin/bud/compare/v1.0.0-rc.1...v1.0.0-rc.2
 [1.0.0-rc.1]: https://github.com/mskutin/bud/releases/tag/v1.0.0-rc.1
