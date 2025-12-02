@@ -2,6 +2,7 @@
 
 [![Go Version](https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![codecov](https://codecov.io/gh/mskutin/bud/branch/main/graph/badge.svg)](https://codecov.io/gh/mskutin/bud)
 
 > Your AWS budget buddy
 
