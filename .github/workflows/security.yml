@@ -34,6 +34,9 @@ jobs:
   gosec:
     name: Security Scan
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -46,12 +49,15 @@ jobs:
       - name: Run Gosec Security Scanner
         uses: securego/gosec@master
         with:
-          args: '-no-fail -fmt sarif -out results.sarif ./...'
-
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v4
-        with:
-          sarif_file: results.sarif
+          args: '-fmt=json -out=results.json ./...'
+      
+      - name: Show Gosec Results
+        if: always()
+        run: |
+          if [ -f results.json ]; then
+            echo "Gosec scan completed. Check results.json for details."
+            jq -r '.Issues[] | "\(.severity): \(.details) at \(.file):\(.line)"' results.json || echo "No issues found"
+          fi
 
   dependency-review:
     name: Dependency Review
