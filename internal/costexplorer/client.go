@@ -104,7 +104,8 @@ func (c *Client) GetAccountCosts(
 		if resultByTime.Total != nil {
 			if metric, ok := resultByTime.Total["UnblendedCost"]; ok {
 				if metric.Amount != nil {
-					fmt.Sscanf(*metric.Amount, "%f", &amount)
+					// #nosec G104 - Sscanf error means amount stays 0.0, which is acceptable
+					_, _ = fmt.Sscanf(*metric.Amount, "%f", &amount)
 				}
 			}
 		}

@@ -359,6 +359,7 @@ func (r *Reporter) priorityValue(priority types.Priority) int {
 }
 
 // writeToFile writes content to a file
+// #nosec G304 - filename is from CLI flag provided by the user running the tool
 func (r *Reporter) writeToFile(content, filename string) error {
 	file, err := os.Create(filename)
 	if err != nil {

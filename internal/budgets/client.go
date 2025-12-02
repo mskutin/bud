@@ -227,7 +227,8 @@ func (c *Client) parseBudgetConfig(
 
 	// Extract limit amount
 	if budget.BudgetLimit != nil && budget.BudgetLimit.Amount != nil {
-		fmt.Sscanf(*budget.BudgetLimit.Amount, "%f", &config.LimitAmount)
+		// #nosec G104 - Sscanf error means LimitAmount stays 0.0, which is acceptable
+		_, _ = fmt.Sscanf(*budget.BudgetLimit.Amount, "%f", &config.LimitAmount)
 	}
 
 	// Extract time unit

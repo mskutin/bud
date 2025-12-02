@@ -106,18 +106,19 @@ built: {{.Annotations.date}}
 	rootCmd.Flags().StringVar(&assumeRoleName, "assume-role-name", "", "Role name to assume in child accounts for budget access (e.g., OrganizationAccountAccessRole)")
 
 	// Bind flags to viper
-	viper.BindPFlag("analysisMonths", rootCmd.Flags().Lookup("analysis-months"))
-	viper.BindPFlag("growthBuffer", rootCmd.Flags().Lookup("growth-buffer"))
-	viper.BindPFlag("minimumBudget", rootCmd.Flags().Lookup("minimum-budget"))
-	viper.BindPFlag("roundingIncrement", rootCmd.Flags().Lookup("rounding-increment"))
-	viper.BindPFlag("outputFormat", rootCmd.Flags().Lookup("output-format"))
-	viper.BindPFlag("outputFile", rootCmd.Flags().Lookup("output-file"))
-	viper.BindPFlag("awsRegion", rootCmd.Flags().Lookup("aws-region"))
-	viper.BindPFlag("awsProfile", rootCmd.Flags().Lookup("aws-profile"))
-	viper.BindPFlag("accounts", rootCmd.Flags().Lookup("accounts"))
-	viper.BindPFlag("organizationalUnits", rootCmd.Flags().Lookup("organizational-units"))
-	viper.BindPFlag("concurrency", rootCmd.Flags().Lookup("concurrency"))
-	viper.BindPFlag("assumeRoleName", rootCmd.Flags().Lookup("assume-role-name"))
+	// #nosec G104 - BindPFlag errors only occur if flag doesn't exist, which can't happen here
+	_ = viper.BindPFlag("analysisMonths", rootCmd.Flags().Lookup("analysis-months"))
+	_ = viper.BindPFlag("growthBuffer", rootCmd.Flags().Lookup("growth-buffer"))
+	_ = viper.BindPFlag("minimumBudget", rootCmd.Flags().Lookup("minimum-budget"))
+	_ = viper.BindPFlag("roundingIncrement", rootCmd.Flags().Lookup("rounding-increment"))
+	_ = viper.BindPFlag("outputFormat", rootCmd.Flags().Lookup("output-format"))
+	_ = viper.BindPFlag("outputFile", rootCmd.Flags().Lookup("output-file"))
+	_ = viper.BindPFlag("awsRegion", rootCmd.Flags().Lookup("aws-region"))
+	_ = viper.BindPFlag("awsProfile", rootCmd.Flags().Lookup("aws-profile"))
+	_ = viper.BindPFlag("accounts", rootCmd.Flags().Lookup("accounts"))
+	_ = viper.BindPFlag("organizationalUnits", rootCmd.Flags().Lookup("organizational-units"))
+	_ = viper.BindPFlag("concurrency", rootCmd.Flags().Lookup("concurrency"))
+	_ = viper.BindPFlag("assumeRoleName", rootCmd.Flags().Lookup("assume-role-name"))
 }
 
 // initConfig reads in config file and ENV variables if set
@@ -254,9 +255,10 @@ func runAnalysis(cmd *cobra.Command, args []string) error {
 
 	// Load policy configuration
 	policyConfig := types.PolicyConfig{}
-	viper.UnmarshalKey("ouPolicies", &policyConfig.OUPolicies)
-	viper.UnmarshalKey("accountPolicies", &policyConfig.AccountPolicies)
-	viper.UnmarshalKey("tagPolicies", &policyConfig.TagPolicies)
+	// #nosec G104 - UnmarshalKey errors are handled by using zero values
+	_ = viper.UnmarshalKey("ouPolicies", &policyConfig.OUPolicies)
+	_ = viper.UnmarshalKey("accountPolicies", &policyConfig.AccountPolicies)
+	_ = viper.UnmarshalKey("tagPolicies", &policyConfig.TagPolicies)
 
 	// Print policy configuration if any policies are defined
 	if len(policyConfig.OUPolicies) > 0 {
@@ -322,24 +324,24 @@ func runAnalysis(cmd *cobra.Command, args []string) error {
 	fmt.Println("Fetching cost data from AWS Cost Explorer...")
 	costBar := progressbar.Default(int64(len(accounts)), "Fetching costs")
 	costData, err := costClient.GetAllAccountsCostsWithProgress(ctx, accounts, startDate, endDate, cfg.Concurrency, func() {
-		costBar.Add(1)
+		_ = costBar.Add(1) // #nosec G104 - progress bar errors are cosmetic
 	})
 	if err != nil {
 		return fmt.Errorf("failed to fetch cost data: %w", err)
 	}
-	costBar.Finish()
+	_ = costBar.Finish() // #nosec G104 - progress bar errors are cosmetic
 	fmt.Println()
 
 	// Fetch budget data
 	fmt.Println("Fetching budget configurations from AWS Budgets...")
 	budgetBar := progressbar.Default(int64(len(accounts)), "Fetching budgets")
 	budgetData, err := budgetClient.GetAllAccountsBudgetsWithProgress(ctx, accounts, cfg.Concurrency, func() {
-		budgetBar.Add(1)
+		_ = budgetBar.Add(1) // #nosec G104 - progress bar errors are cosmetic
 	})
 	if err != nil {
 		return fmt.Errorf("failed to fetch budget data: %w", err)
 	}
-	budgetBar.Finish()
+	_ = budgetBar.Finish() // #nosec G104 - progress bar errors are cosmetic
 	fmt.Println()
 
 	// Analyze and generate recommendations
