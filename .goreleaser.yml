@@ -98,7 +98,7 @@ brews:
     repository:
       owner: mskutin
       name: homebrew-tap
-    folder: Formula
+    directory: Formula
     homepage: https://github.com/mskutin/bud
     description: Your AWS budget buddy - smart recommendations based on spending patterns
     license: MIT
