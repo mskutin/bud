@@ -186,8 +186,6 @@ func runAnalysis(cmd *cobra.Command, args []string) error {
 		cancel()
 	}()
 
-
-
 	// Build configuration
 	cfg := types.AnalysisConfig{
 		AnalysisMonths:        viper.GetInt("analysisMonths"),
