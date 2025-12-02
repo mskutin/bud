@@ -98,6 +98,7 @@ brews:
     repository:
       owner: mskutin
       name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
     directory: Formula
     homepage: https://github.com/mskutin/bud
     description: Your AWS budget buddy - smart recommendations based on spending patterns
