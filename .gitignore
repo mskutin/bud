@@ -1,6 +1,6 @@
-# Binaries
-bud
-bud-*
+# Binaries (root level only)
+/bud
+/bud-*
 *.exe
 *.dll
 *.so
