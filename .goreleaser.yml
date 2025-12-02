@@ -1,0 +1,108 @@
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+    - go test ./...
+
+builds:
+  - id: bud
+    main: ./cmd/bud
+    binary: bud
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+      - -X github.com/mskutin/bud/internal/cmd.version={{.Version}}
+      - -X github.com/mskutin/bud/internal/cmd.commit={{.Commit}}
+      - -X github.com/mskutin/bud/internal/cmd.date={{.Date}}
+
+archives:
+  - id: bud
+    format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- .Version }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - LICENSE
+      - CHANGELOG.md
+      - .bud.yaml.example
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
+      - '^ci:'
+  groups:
+    - title: Features
+      regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
+      order: 0
+    - title: 'Bug fixes'
+      regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
+      order: 1
+    - title: 'Performance improvements'
+      regexp: '^.*?perf(\([[:word:]]+\))??!?:.+$'
+      order: 2
+    - title: Others
+      order: 999
+
+release:
+  github:
+    owner: mskutin
+    name: bud
+  draft: false
+  prerelease: auto
+  name_template: "{{.ProjectName}} v{{.Version}}"
+  footer: |
+    ## Installation
+    
+    ### Homebrew (macOS/Linux)
+    ```bash
+    brew install mskutin/tap/bud
+    ```
+    
+    ### Go Install
+    ```bash
+    go install github.com/mskutin/bud@latest
+    ```
+    
+    ### Binary Download
+    Download the appropriate binary for your platform from the assets below.
+
+brews:
+  - name: bud
+    repository:
+      owner: mskutin
+      name: homebrew-tap
+    folder: Formula
+    homepage: https://github.com/mskutin/bud
+    description: Your AWS budget buddy - smart recommendations based on spending patterns
+    license: MIT
+    install: |
+      bin.install "bud"
+    test: |
+      system "#{bin}/bud", "--version"

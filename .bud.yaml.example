@@ -1,0 +1,144 @@
+# Bud Configuration File
+# Copy this file to .bud.yaml and customize as needed
+
+# Number of months to analyze for historical spending patterns
+analysisMonths: 3
+
+# Growth buffer percentage to add above peak spend (e.g., 20 = 20%)
+growthBuffer: 20
+
+# Minimum budget amount for any account (USD)
+minimumBudget: 10
+
+# Round budget recommendations to nearest increment (USD)
+roundingIncrement: 10
+
+# AWS region to use for API calls
+awsRegion: us-east-1
+
+# Number of concurrent API calls (adjust based on rate limits)
+concurrency: 5
+
+# Output format: table, json, or both
+outputFormat: table
+
+# Optional: Output file path for JSON export
+# outputFile: budget-recommendations.json
+
+# Optional: AWS profile to use (if not using default)
+# awsProfile: my-profile
+
+# Optional: Filter specific account IDs (comma-separated)
+# accounts:
+#   - "123456789012"
+#   - "234567890123"
+
+# Optional: Filter by Organizational Unit IDs
+# Useful for analyzing specific parts of your organization
+# organizationalUnits:
+#   - "ou-xxxx-11111111"
+#   - "ou-yyyy-22222222"
+
+# Optional: Role name to assume in child accounts for budget access
+# This is useful when budgets are created in child accounts but you're running
+# from the management account. The role must exist in each child account.
+# Common role names: OrganizationAccountAccessRole, BudgetReadRole
+# assumeRoleName: OrganizationAccountAccessRole
+
+# ============================================================================
+# Per-OU/Account Policy Configuration
+# ============================================================================
+# You can define different budget recommendation policies for different parts
+# of your organization. Policies are resolved with the following priority:
+#   1. Account Policy (highest priority)
+#   2. Tag Policy
+#   3. OU Policy
+#   4. Default Policy (global settings above)
+#
+# Each policy can override any combination of: growthBuffer, minimumBudget,
+# roundingIncrement. Unspecified values inherit from the default policy.
+
+# OU-specific policies
+# Apply different policies to entire Organizational Units
+# ouPolicies:
+#   - ou: "ou-prod-12345678"
+#     name: "Production"
+#     growthBuffer: 15          # More conservative for production
+#     minimumBudget: 50         # Higher minimum for prod accounts
+#     roundingIncrement: 50     # Round to nearest $50
+#
+#   - ou: "ou-dev-87654321"
+#     name: "Development"
+#     growthBuffer: 30          # More flexible for dev/test
+#     minimumBudget: 10         # Lower minimum for dev accounts
+#     # roundingIncrement inherits from default (10)
+#
+#   - ou: "ou-sandbox-99999999"
+#     name: "Sandbox"
+#     growthBuffer: 50          # Very flexible for experimentation
+#     minimumBudget: 5
+
+# Tag-based policies
+# Apply policies based on account tags (e.g., Environment, CostCenter)
+# tagPolicies:
+#   - tagKey: "Environment"
+#     tagValue: "production"
+#     name: "Production (by tag)"
+#     growthBuffer: 15
+#     minimumBudget: 50
+#
+#   - tagKey: "CostCenter"
+#     tagValue: "engineering"
+#     name: "Engineering"
+#     growthBuffer: 25
+#     roundingIncrement: 25
+
+# Account-specific overrides
+# Highest priority - override policy for specific accounts
+# accountPolicies:
+#   - account: "123456789012"
+#     name: "Critical API"
+#     growthBuffer: 10          # Very tight control
+#     minimumBudget: 100        # High minimum
+#     roundingIncrement: 100    # Round to nearest $100
+#
+#   - account: "234567890123"
+#     name: "Data Warehouse"
+#     growthBuffer: 5           # Predictable costs
+#     minimumBudget: 500
+#     roundingIncrement: 100
+
+# ============================================================================
+# Policy Configuration Examples
+# ============================================================================
+#
+# Example 1: Conservative Production, Flexible Development
+# ouPolicies:
+#   - ou: "ou-prod-12345678"
+#     name: "Production"
+#     growthBuffer: 10
+#     minimumBudget: 100
+#   - ou: "ou-dev-87654321"
+#     name: "Development"
+#     growthBuffer: 40
+#     minimumBudget: 10
+#
+# Example 2: Cost Center-Based Policies
+# tagPolicies:
+#   - tagKey: "CostCenter"
+#     tagValue: "marketing"
+#     name: "Marketing"
+#     growthBuffer: 30
+#   - tagKey: "CostCenter"
+#     tagValue: "infrastructure"
+#     name: "Infrastructure"
+#     growthBuffer: 15
+#     minimumBudget: 200
+#
+# Example 3: Critical Account Override
+# accountPolicies:
+#   - account: "999888777666"
+#     name: "Payment Processing"
+#     growthBuffer: 5
+#     minimumBudget: 1000
+#     roundingIncrement: 500
