@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simple bud icon for favicon/small use -->
+  <circle cx="32" cy="32" r="30" fill="#00ADD8" opacity="0.15"/>
+  
+  <!-- Stem -->
+  <path d="M 32 45 Q 32 35 32 28" stroke="#2E7D32" stroke-width="3" fill="none" stroke-linecap="round"/>
+  
+  <!-- Leaves -->
+  <path d="M 32 38 Q 24 36 22 32 Q 24 34 32 36" fill="#4CAF50"/>
+  <path d="M 32 40 Q 40 38 42 34 Q 40 36 32 38" fill="#4CAF50"/>
+  
+  <!-- Bud -->
+  <ellipse cx="32" cy="24" rx="8" ry="12" fill="#81C784" stroke="#2E7D32" stroke-width="1.5"/>
+  <text x="32" y="28" font-family="Arial" font-size="12" font-weight="bold" fill="#2E7D32" text-anchor="middle">$</text>
+</svg>

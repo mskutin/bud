@@ -1,4 +1,12 @@
-# Bud
+<div align="center">
+  <img src="logo.svg" alt="Bud Logo" width="150" height="150">
+  
+  # Bud
+  
+  **Your AWS Budget Buddy**
+</div>
+
+<div align="center">
 
 [![Go Version](https://img.shields.io/badge/Go-1.25+-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -8,7 +16,7 @@
 [![codecov](https://codecov.io/gh/mskutin/bud/branch/main/graph/badge.svg)](https://codecov.io/gh/mskutin/bud)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mskutin/bud)](https://goreportcard.com/report/github.com/mskutin/bud)
 
-> Your AWS budget buddy
+</div>
 
 A command-line tool that analyzes AWS spending patterns and generates intelligent recommendations for [AWS Budgets](https://aws.amazon.com/aws-cost-management/aws-budgets/) configurations.
 

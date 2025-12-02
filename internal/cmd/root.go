@@ -47,6 +47,21 @@ var (
 	assumeRoleName    string // Role name to assume in child accounts
 )
 
+// printBanner prints the ASCII art banner
+func printBanner() {
+	fmt.Println()
+	fmt.Println("  ___           _ ")
+	fmt.Println(" | _ ) _  _  __| |")
+	fmt.Println(" | _ \\| || |/ _` |")
+	fmt.Println(" |___/ \\_,_|\\__,_|")
+	fmt.Println()
+	fmt.Printf(" 🌱 Your AWS Budget Buddy (v%s)\n", version)
+	if commit != "none" {
+		fmt.Printf(" Built: %s (commit: %s)\n", date, commit)
+	}
+	fmt.Println()
+}
+
 // rootCmd represents the base command
 var rootCmd = &cobra.Command{
 	Use:     "bud",
@@ -59,6 +74,12 @@ configurations.
 The tool retrieves actual spend data from AWS Cost Explorer and compares 
 it against configured budgets to identify accounts with misaligned budget 
 settings.`,
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		// Don't show banner for help or version
+		if cmd.Name() != "help" && !cmd.Flags().Changed("version") {
+			printBanner()
+		}
+	},
 	RunE: runAnalysis,
 }
 
@@ -165,10 +186,7 @@ func runAnalysis(cmd *cobra.Command, args []string) error {
 		cancel()
 	}()
 
-	// Print banner
-	fmt.Println("Bud - Your AWS Budget Buddy")
-	fmt.Println("===========================")
-	fmt.Println()
+
 
 	// Build configuration
 	cfg := types.AnalysisConfig{
