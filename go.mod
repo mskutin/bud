@@ -13,7 +13,7 @@ require (
 	github.com/fatih/color v1.18.0
 	github.com/leanovate/gopter v0.2.11
 	github.com/schollz/progressbar/v3 v3.18.0
-	github.com/spf13/cobra v1.10.1
+	github.com/spf13/cobra v1.10.2
 	github.com/spf13/viper v1.21.0
 	github.com/stretchr/testify v1.11.1
 )
