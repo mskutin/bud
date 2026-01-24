@@ -99,11 +99,11 @@ func TestGetClientForAccount_WithRoleAssumption_ValidAccountID(t *testing.T) {
 
 func TestGetClientForAccount_RoleARNConstruction(t *testing.T) {
 	tests := []struct {
-		name           string
-		accountID      string
-		roleName       string
-		expectedARN    string
-		expectError    bool
+		name        string
+		accountID   string
+		roleName    string
+		expectedARN string
+		expectError bool
 	}{
 		{
 			name:        "valid account ID with role",
@@ -358,12 +358,12 @@ func TestParseBudgetConfig_ValidBudget(t *testing.T) {
 
 func TestParseBudgetConfig_MissingFields(t *testing.T) {
 	tests := []struct {
-		name         string
-		budgetName   *string
-		limitAmount  *string
-		timeUnit     btypes.TimeUnit
-		expectName   string
-		expectLimit  float64
+		name        string
+		budgetName  *string
+		limitAmount *string
+		timeUnit    btypes.TimeUnit
+		expectName  string
+		expectLimit float64
 	}{
 		{
 			name:        "missing budget name",
@@ -595,23 +595,23 @@ func TestGetAccountBudgets_ErrorHandling(t *testing.T) {
 	// Without actual mocking framework, we document expectations
 
 	tests := []struct {
-		name          string
-		errorMsg      string
+		name           string
+		errorMsg       string
 		expectedStatus types.BudgetAccessStatus
 	}{
 		{
-			name:          "access denied error",
-			errorMsg:      "AccessDeniedException: not authorized",
+			name:           "access denied error",
+			errorMsg:       "AccessDeniedException: not authorized",
 			expectedStatus: types.BudgetAccessDenied,
 		},
 		{
-			name:          "not found error",
-			errorMsg:      "NotFoundException: no budget found",
+			name:           "not found error",
+			errorMsg:       "NotFoundException: no budget found",
 			expectedStatus: types.BudgetAccessNotFound,
 		},
 		{
-			name:          "other error",
-			errorMsg:      "some other error",
+			name:           "other error",
+			errorMsg:       "some other error",
 			expectedStatus: types.BudgetAccessError,
 		},
 	}
@@ -699,40 +699,40 @@ func newAPIError(errorCode string) error {
 // TestErrorClassification tests classification of AWS API errors
 func TestErrorClassification(t *testing.T) {
 	tests := []struct {
-		name          string
-		errorCode     string
+		name           string
+		errorCode      string
 		isAccessDenied bool
-		isNotFound    bool
+		isNotFound     bool
 	}{
 		{
-			name:          "AccessDeniedException",
-			errorCode:     "AccessDeniedException",
+			name:           "AccessDeniedException",
+			errorCode:      "AccessDeniedException",
 			isAccessDenied: true,
-			isNotFound:    false,
+			isNotFound:     false,
 		},
 		{
-			name:          "AccessDenied",
-			errorCode:     "AccessDenied",
+			name:           "AccessDenied",
+			errorCode:      "AccessDenied",
 			isAccessDenied: true,
-			isNotFound:    false,
+			isNotFound:     false,
 		},
 		{
-			name:          "NotFoundException",
-			errorCode:     "NotFoundException",
+			name:           "NotFoundException",
+			errorCode:      "NotFoundException",
 			isAccessDenied: false,
-			isNotFound:    true,
+			isNotFound:     true,
 		},
 		{
-			name:          "NotFound",
-			errorCode:     "NotFound",
+			name:           "NotFound",
+			errorCode:      "NotFound",
 			isAccessDenied: false,
-			isNotFound:    true,
+			isNotFound:     true,
 		},
 		{
-			name:          "OtherError",
-			errorCode:     "SomeOtherError",
+			name:           "OtherError",
+			errorCode:      "SomeOtherError",
 			isAccessDenied: false,
-			isNotFound:    false,
+			isNotFound:     false,
 		},
 	}
 

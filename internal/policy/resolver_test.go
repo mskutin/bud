@@ -806,45 +806,45 @@ func TestResolvePolicy_MultipleAccounts(t *testing.T) {
 	resolver.accountToOU["345678901234"] = "ou-dev-87654321"
 
 	tests := []struct {
-		name             string
-		accountID        string
-		expectedPolicy   string
-		expectedGrowth   float64
+		name              string
+		accountID         string
+		expectedPolicy    string
+		expectedGrowth    float64
 		expectedMinBudget float64
 	}{
 		{
-			name:             "production account 1",
-			accountID:        "123456789012",
-			expectedPolicy:   "Production",
-			expectedGrowth:   15,
+			name:              "production account 1",
+			accountID:         "123456789012",
+			expectedPolicy:    "Production",
+			expectedGrowth:    15,
 			expectedMinBudget: 50,
 		},
 		{
-			name:             "production account 2",
-			accountID:        "234567890123",
-			expectedPolicy:   "Production",
-			expectedGrowth:   15,
+			name:              "production account 2",
+			accountID:         "234567890123",
+			expectedPolicy:    "Production",
+			expectedGrowth:    15,
 			expectedMinBudget: 50,
 		},
 		{
-			name:             "development account",
-			accountID:        "345678901234",
-			expectedPolicy:   "Development",
-			expectedGrowth:   30,
+			name:              "development account",
+			accountID:         "345678901234",
+			expectedPolicy:    "Development",
+			expectedGrowth:    30,
 			expectedMinBudget: 10,
 		},
 		{
-			name:             "account policy override",
-			accountID:        "999888777666",
-			expectedPolicy:   "VIP",
-			expectedGrowth:   5,
+			name:              "account policy override",
+			accountID:         "999888777666",
+			expectedPolicy:    "VIP",
+			expectedGrowth:    5,
 			expectedMinBudget: 1000,
 		},
 		{
-			name:             "default policy",
-			accountID:        "111111111111",
-			expectedPolicy:   "Default",
-			expectedGrowth:   20,
+			name:              "default policy",
+			accountID:         "111111111111",
+			expectedPolicy:    "Default",
+			expectedGrowth:    20,
 			expectedMinBudget: 10,
 		},
 	}
@@ -1040,18 +1040,18 @@ func newOrganizationsError(code string) error {
 // TestErrorClassification tests error classification for organizations API
 func TestErrorClassification(t *testing.T) {
 	tests := []struct {
-		name          string
-		errorCode     string
+		name               string
+		errorCode          string
 		expectAccessDenied bool
 	}{
 		{
-			name:          "AccessDeniedException",
-			errorCode:     "AccessDeniedException",
+			name:               "AccessDeniedException",
+			errorCode:          "AccessDeniedException",
 			expectAccessDenied: true,
 		},
 		{
-			name:          "UnauthorizedOperation",
-			errorCode:     "UnauthorizedOperation",
+			name:               "UnauthorizedOperation",
+			errorCode:          "UnauthorizedOperation",
 			expectAccessDenied: false,
 		},
 	}
